@@ -18,15 +18,15 @@ class ArmaContundente inherits Arma {
   }
 }
 class Armadura {
-  method defensa () { }
+  method puntosArmadura () { }
 }
 class Casco inherits Armadura {
-  override method defensa () {
+  override method puntosArmadura () {
     return 10
   }
 }
 class Escudo inherits Armadura {
-  override method defensa() {
+  override method puntosArmadura() {
     return 5 + (self.destrezaGladiador()*0.10)
   }
   method destrezaGladiador() {
@@ -42,7 +42,7 @@ class Gladiador {
   method fuerza() { return }
   method poderAtaque() { }
   method atacar() { 
-    vida = (self.poderAtaque() - otroGladiador.puntosDefenza()).max(0) 
+    self.poderAtaque() - otroGladiador.puntosDefenza()
   }
   method defender() { }
   method arma() { return arma}
@@ -58,10 +58,13 @@ class Mirmillon inherits Gladiador {
     return 15
   }
   override method puntosDefenza() {
-    return armadura + self.destreza()
+    return armadura.defensa() + self.destreza()
   }
   method cambiarArmadura(otraArmadura) {
     armadura = otraArmadura
+  }
+  method armadura() {
+    return armadura
   }
 }
 class Dimachaerus inherits Gladiador {
